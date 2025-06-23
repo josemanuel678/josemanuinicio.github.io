@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>R3TA EDU - Login Animado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: white;
+    }
+
+    /* 🎥 Fondo con GIF animado */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('https://img.freepik.com/foto-gratis/circulo-llamas_1160-750.jpg?semt=ais_hybrid&w=740'); 
+      background-size: 100% 100%;
+background-repeat: no-repeat;
+      background-position: center;
+      z-index: -2;
+      opacity: 0.9;
+      filter: brightness(0.8) saturate(1.3);
+    }
+
+    /* 🌫 Capa efecto fuego extra */
+    body::after {
+      content: "";
+      position: absolute;
+      inset: -50px;
+      background: radial-gradient(circle at top left, rgba(255,0,128,0.3), transparent),
+                  radial-gradient(circle at bottom right, rgba(0,255,255,0.2), transparent);
+      animation: fuegoBordes 6s ease-in-out infinite alternate;
+      z-index: -1;
+      pointer-events: none;
+      filter: blur(60px);
+    }
+
+    @keyframes fuegoBordes {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.1) translate(10px, -10px); }
+    }
+
+    .login-container {
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.7);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #ff00ffaa, 0 0 60px #00ffff55;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      display: none;
+      z-index: 1;
+    }
+
+    .login-container.active {
+      display: block;
+    }
+
+    h2 {
+      color: #ff00ff;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 10px #ff00ff;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      background-color: #111;
+      color: #0ff;
+      box-shadow: inset 0 0 10px #00ffff55;
+    }
+
+    input::placeholder {
+      color: #888;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      background: linear-gradient(to right, #00ffff, #ff00ff);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffff, 0 0 30px #ff00ff;
+    }
+
+    .hidden-content {
+      display: none;
+      text-align: center;
+      font-size: 1.5rem;
+      backdrop-filter: blur(6px);
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 2rem;
+      border-radius: 20px;
+      animation: fadeIn 1s ease;
+      z-index: 1;
+    }
+
+    .hidden-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container active" id="login">
+    <h2>🔥 R3TA EDU 🔥</h2>
+    <p class="subtitle">Ingresa la contraseña para continuar</p>
+    <form onsubmit="return loginUser(event)">
+      <input type="text" id="email" placeholder="Correo electrónico" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <button type="submit">Iniciar sesión</button>
+    </form>
+
+  </div>
+
+  <div class="hidden-content" id="contenido">
+    <h1>🚀 ¡Acceso autorizado!</h1>
+    <p>Bienvenido a la zona de TUTORIA 601. Prepárate para aprender!.</p>
+<a href="https://josemanuel678.github.io/Tutoriasedu/" target="_blank"
+       style="display: inline-block; margin-top: 20px; padding: 15px 30px; background-color: #26a69a; color: white; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 16px;">
+      ¡INICIO! 🚀
+    </a>
+  </div>
+
+  <script>
+    function loginUser(event) {
+      event.preventDefault();
+      const password = document.getElementById("password").value;
+      if (password === "123") {
+        document.getElementById("login").classList.remove("active");
+        document.getElementById("contenido").classList.add("active");
+      } else {
+        alert("⚠️ Contraseña incorrecta.");
+      }
+    }
+  </script>
+
+</body>
+</html>
